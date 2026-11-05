@@ -1,3 +1,7 @@
+<div align="right">
+  <strong>English</strong> | <a href="README.pt-BR.md">Português</a>
+</div>
+
 # PW OpsDesk — Enterprise Operations & ITSM Dispatch Architecture 🏢📡
 
 [![Platform](https://img.shields.io/badge/Platform-B2B%20Enterprise%20SaaS-blue.svg)](https://github.com/Lorinmr-dev)
@@ -25,7 +29,7 @@ flowchart TD
     end
 
     subgraph CORE_SERVER["PW OpsDesk Central Engine (Node.js ESM)"]
-        Auth["RBAC Enforcement Engine\n(Admin / Master / Operador)"]
+        Auth["RBAC Enforcement Engine\n(Admin / Supervisor / Operator)"]
         SocketHub["Real-Time Dispatch Hub\n(Socket.io Engine)"]
         Storage["Atomic Journal Storage\n(SQLite WAL Mode)"]
         PDF["Perceptual PDF Generator\n(Digital Signature Engine)"]
@@ -51,9 +55,9 @@ flowchart TD
 ## 🛡️ Enterprise Governance & Security Matrix
 
 ### 1. Granular Role-Based Access Control (RBAC)
-- **Operador (Field Technician):** Restricted to assigned ticket scope, camera/photo capture, and geolocation check-in.
-- **Master (Regional Supervisor):** Ticket delegation, biometric identity approval, and real-time inspector radar tracking.
-- **Admin (System Governor):** Full audit trail inspection, tenant provisioning, and global compliance configuration.
+- **Field Operator:** Restricted to assigned ticket scope, camera/photo capture, and geolocation check-in.
+- **Field Supervisor (Master):** Ticket delegation, biometric identity approval, and real-time inspector radar tracking.
+- **System Administrator:** Full audit trail inspection, tenant provisioning, and global compliance configuration.
 
 ### 2. Offline-First Resilience
 - Field inspections often occur in basements, underground hubs, or areas with zero 4G/5G connectivity.
@@ -66,13 +70,13 @@ flowchart TD
 
 ## 📊 Technical Specifications & Throughput SLA
 
-| Parâmetro | Especificação / Benchmark |
+| Parameter | Specification / Benchmark |
 | :--- | :--- |
-| **Throughput de Eventos** | **> 12.000 mensagens/segundo** (Socket.io Cluster) |
-| **Latência Média de Despacho** | **< 38 ms** (Rede 4G padrão) |
-| **Persistência de Dados** | SQLite WAL Mode com transações atômicas ACID |
-| **Geração de Laudos Técnicos** | PDFKit assíncrono em < 450ms por laudo com fotos periciais |
-| **Integração de Tickets** | HaloITSM REST API v2 (Webhook bidirecional) |
+| **Event Throughput** | **> 12,000 messages/sec** (Socket.io Cluster) |
+| **Average Dispatch Latency** | **< 38 ms** (Standard 4G LTE Network) |
+| **Data Persistence** | SQLite WAL Mode with ACID Atomic Transactions |
+| **Technical Report Generation** | Async PDFKit in < 450ms per report with forensic photos |
+| **ITSM Integration** | HaloITSM REST API v2 (Bidirectional Webhooks) |
 
 ---
 
