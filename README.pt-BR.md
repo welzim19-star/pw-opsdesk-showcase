@@ -4,15 +4,15 @@
 
 # PW OpsDesk — Central Operacional & Arquitetura de Despacho ITSM 🏢📡
 
-[![Plataforma](https://img.shields.io/badge/Plataforma-B2B%20Enterprise%20SaaS-blue.svg)](https://github.com/Lorinmr-dev)
+[![Plataforma](https://img.shields.io/badge/Plataforma-B2B%20Enterprise%20SaaS-blue.svg)](https://github.com/PW-SYSTEM)
 [![Arquitetura](https://img.shields.io/badge/Arquitetura-Orientada%20a%20Eventos%20%2F%20Socket.io-orange.svg)](https://socket.io/)
 [![Padrão](https://img.shields.io/badge/Padr%C3%A3o-Compat%C3%ADvel%20Cherwell%20ITSM-brightgreen.svg)](https://www.ivanti.com)
-[![Organização](https://img.shields.io/badge/Organiza%C3%A7%C3%A3o-Lorinmr--dev-black.svg)](https://github.com/Lorinmr-dev)
-[![Status](https://img.shields.io/badge/Propriet%C3%A1rio-Comercial%20B2B-red.svg)](https://github.com/Lorinmr-dev)
+[![Organização](https://img.shields.io/badge/Organiza%C3%A7%C3%A3o-PW--SYSTEM-black.svg)](https://github.com/PW-SYSTEM)
+[![Status](https://img.shields.io/badge/Propriet%C3%A1rio-Comercial%20B2B-red.svg)](https://github.com/PW-SYSTEM)
 
 > **Vitrine Arquitetural & Especificação de Design de Sistemas.**  
 > Central de comando para operações de missão crítica, inspeção técnica em campo e auditoria biométrica pericial desenvolvida para concessionárias, órgãos públicos e infraestrutura de telecomunicações/CFTV.  
-> *Desenvolvido e mantido por [Lorinmr-dev](https://github.com/Lorinmr-dev).*
+> *Desenvolvido e mantido por [PW-SYSTEM](https://github.com/PW-SYSTEM).*
 
 ---
 
@@ -81,4 +81,4 @@ flowchart TD
 ---
 
 ## 🔒 Aviso Comercial
-*Este repositório atua como especificação pública de arquitetura e estudo de caso técnico. O código-fonte de produção, algoritmos proprietários e manifestos de implantação são ativos comerciais privados da [Lorinmr-dev](https://github.com/Lorinmr-dev).*
+*Este repositório atua como especificação pública de arquitetura e estudo de caso técnico. O código-fonte de produção, algoritmos proprietários e manifestos de implantação são ativos comerciais privados da [PW-SYSTEM](https://github.com/PW-SYSTEM).*

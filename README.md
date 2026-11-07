@@ -4,15 +4,15 @@
 
 # PW OpsDesk — Enterprise Operations & ITSM Dispatch Architecture 🏢📡
 
-[![Platform](https://img.shields.io/badge/Platform-B2B%20Enterprise%20SaaS-blue.svg)](https://github.com/Lorinmr-dev)
+[![Platform](https://img.shields.io/badge/Platform-B2B%20Enterprise%20SaaS-blue.svg)](https://github.com/PW-SYSTEM)
 [![Architecture](https://img.shields.io/badge/Architecture-Event--Driven%20%2F%20Socket.io-orange.svg)](https://socket.io/)
 [![Standard](https://img.shields.io/badge/Standard-Cherwell%20ITSM%20Compliant-brightgreen.svg)](https://www.ivanti.com)
-[![Organization](https://img.shields.io/badge/Organization-Lorinmr--dev-black.svg)](https://github.com/Lorinmr-dev)
-[![Status](https://img.shields.io/badge/Proprietary-Commercial%20B2B-red.svg)](https://github.com/Lorinmr-dev)
+[![Organization](https://img.shields.io/badge/Organization-PW--SYSTEM-black.svg)](https://github.com/PW-SYSTEM)
+[![Status](https://img.shields.io/badge/Proprietary-Commercial%20B2B-red.svg)](https://github.com/PW-SYSTEM)
 
 > **Architectural Showcase & System Design Specification.**  
 > Central command desk for mission-critical operations, field service inspection, and biometric auditing developed for public agencies and enterprise telecom/CCTV infrastructure.  
-> *Developed and maintained by [Lorinmr-dev](https://github.com/Lorinmr-dev).*
+> *Developed and maintained by [PW-SYSTEM](https://github.com/PW-SYSTEM).*
 
 ---
 
@@ -81,4 +81,4 @@ flowchart TD
 ---
 
 ## 🔒 Commercial Notice
-*This repository serves as the public architectural specification and case study. The underlying production codebase, proprietary algorithms, and deployment manifests are private commercial assets of [Lorinmr-dev](https://github.com/Lorinmr-dev).*
+*This repository serves as the public architectural specification and case study. The underlying production codebase, proprietary algorithms, and deployment manifests are private commercial assets of [PW-SYSTEM](https://github.com/PW-SYSTEM).*
