@@ -23,16 +23,16 @@ PW OpsDesk operates as the nervous system connecting mobile field inspectors, su
 ```mermaid
 flowchart TD
     subgraph FIELD_CLIENTS["Field Operational Tier (Android / Mobile)"]
-        Inspector["PW Certify Enterprise\n(Capacitor + Tauri Mobile)"]
-        Biometrics["Face Biometrics & TOTP\n(Offline Challenge-Response)"]
+        Inspector["PW Certify Enterprise<br/>(Capacitor + Tauri Mobile)"]
+        Biometrics["Face Biometrics & TOTP<br/>(Offline Challenge-Response)"]
         Inspector --- Biometrics
     end
 
     subgraph CORE_SERVER["PW OpsDesk Central Engine (Node.js ESM)"]
-        Auth["RBAC Enforcement Engine\n(Admin / Supervisor / Operator)"]
-        SocketHub["Real-Time Dispatch Hub\n(Socket.io Engine)"]
-        Storage["Atomic Journal Storage\n(SQLite WAL Mode)"]
-        PDF["Perceptual PDF Generator\n(Digital Signature Engine)"]
+        Auth["RBAC Enforcement Engine<br/>(Admin / Supervisor / Operator)"]
+        SocketHub["Real-Time Dispatch Hub<br/>(Socket.io Engine)"]
+        Storage["Atomic Journal Storage<br/>(SQLite WAL Mode)"]
+        PDF["Perceptual PDF Generator<br/>(Digital Signature Engine)"]
         
         Auth --> SocketHub
         SocketHub --> Storage
@@ -40,7 +40,7 @@ flowchart TD
     end
 
     subgraph EXTERNAL["Enterprise Integrations"]
-        HaloITSM["HaloITSM Service Desk API\n(Bidirectional Ticket Sync)"]
+        HaloITSM["HaloITSM Service Desk API<br/>(Bidirectional Ticket Sync)"]
         AuditStream["SHA-256 Audit Trail Streamer"]
     end
 
