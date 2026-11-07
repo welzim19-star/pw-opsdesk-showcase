@@ -52,6 +52,41 @@ flowchart TD
 
 ---
 
+## 📸 Production Operational Showcase
+
+Field captures from enterprise deployments demonstrating dispatcher controls, mobile inspection workflows, and cryptographic evidence sealing:
+
+<table width="100%">
+  <tr>
+    <td width="50%" align="center" valign="top">
+      <img src="docs/assets/app_hub_view.jpg" alt="Operational Dispatch Hub" width="100%" />
+      <p><strong>Operational Dispatch Hub:</strong> Real-time ticket routing, live supervisor radar, and queue governance.</p>
+    </td>
+    <td width="50%" align="center" valign="top">
+      <img src="docs/assets/app_redes_mapping.png" alt="Network & Topology Inspection" width="100%" />
+      <p><strong>Network Infrastructure Mapping:</strong> Switch port auditing, topology discovery, and telecom rack verification.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center" valign="top">
+      <img src="docs/assets/app_cftv_checklist.png" alt="CCTV Inspection Checklist" width="100%" />
+      <p><strong>CCTV Camera Compliance Checklist:</strong> Point-to-point stream validation, optic alignment, and physical hardening.</p>
+    </td>
+    <td width="50%" align="center" valign="top">
+      <img src="docs/assets/app_pdf_dossier.png" alt="Forensic PDF Dossier" width="100%" />
+      <p><strong>Forensic PDF Audit Dossier:</strong> Digitally signed, tamper-evident inspection reports generated in real time.</p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" valign="top">
+      <img src="docs/assets/app_signature_modal.jpg" alt="Biometric & Digital Signature" width="60%" />
+      <p><strong>Biometric & Digital Signature Modal:</strong> Field client seal with GPS coordinate locking and SHA-256 integrity hash.</p>
+    </td>
+  </tr>
+</table>
+
+---
+
 ## 🛡️ Enterprise Governance & Security Matrix
 
 ### 1. Granular Role-Based Access Control (RBAC)

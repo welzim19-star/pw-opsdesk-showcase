@@ -23,16 +23,16 @@ O PW OpsDesk atua como o sistema nervoso central conectando inspetores móveis e
 ```mermaid
 flowchart TD
     subgraph FIELD_CLIENTS["Camada Operacional de Campo (Android / Mobile)"]
-        Inspector["PW Certify Enterprise\n(Capacitor + Tauri Mobile)"]
-        Biometrics["Biometria Facial & TOTP\n(Desafio-Resposta Offline)"]
+        Inspector["PW Certify Enterprise<br/>(Capacitor + Tauri Mobile)"]
+        Biometrics["Biometria Facial & TOTP<br/>(Desafio-Resposta Offline)"]
         Inspector --- Biometrics
     end
 
     subgraph CORE_SERVER["Motor Central PW OpsDesk (Node.js ESM)"]
-        Auth["Motor de Aplicação RBAC\n(Administrador / Supervisor / Operador)"]
-        SocketHub["Central de Despacho em Tempo Real\n(Motor Socket.io)"]
-        Storage["Armazenamento em Jornal Atômico\n(SQLite Modo WAL)"]
-        PDF["Gerador de Laudos PDF Periciais\n(Motor de Assinatura Digital)"]
+        Auth["Motor de Aplicação RBAC<br/>(Administrador / Supervisor / Operador)"]
+        SocketHub["Central de Despacho em Tempo Real<br/>(Motor Socket.io)"]
+        Storage["Armazenamento em Jornal Atômico<br/>(SQLite Modo WAL)"]
+        PDF["Gerador de Laudos PDF Periciais<br/>(Motor de Assinatura Digital)"]
         
         Auth --> SocketHub
         SocketHub --> Storage
@@ -40,7 +40,7 @@ flowchart TD
     end
 
     subgraph EXTERNAL["Integrações Corporativas"]
-        HaloITSM["API de Service Desk HaloITSM\n(Sincronização Bidirecional)"]
+        HaloITSM["API de Service Desk HaloITSM<br/>(Sincronização Bidirecional)"]
         AuditStream["Transmissor de Trilha SHA-256"]
     end
 
@@ -49,6 +49,41 @@ flowchart TD
     CORE_SERVER --> HaloITSM
     CORE_SERVER --> AuditStream
 ```
+
+---
+
+## 📸 Vitrine Operacional em Produção
+
+Registros de campo em ambiente corporativo demonstrando os fluxos de despacho, auditoria técnica e selamento criptográfico:
+
+<table width="100%">
+  <tr>
+    <td width="50%" align="center" valign="top">
+      <img src="docs/assets/app_hub_view.jpg" alt="Central de Despacho Operacional" width="100%" />
+      <p><strong>Central de Despacho:</strong> Roteamento de ordens de serviço em tempo real, radar de equipes e gestão de filas.</p>
+    </td>
+    <td width="50%" align="center" valign="top">
+      <img src="docs/assets/app_redes_mapping.png" alt="Mapeamento de Topologia de Rede" width="100%" />
+      <p><strong>Mapeamento de Redes:</strong> Auditoria de portas de switch, topologia e validação de racks de telecom.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center" valign="top">
+      <img src="docs/assets/app_cftv_checklist.png" alt="Checklist Pericial de CFTV" width="100%" />
+      <p><strong>Checklist de CFTV:</strong> Validação de fluxo de vídeo ponto a ponto, foco ótico e integridade física.</p>
+    </td>
+    <td width="50%" align="center" valign="top">
+      <img src="docs/assets/app_pdf_dossier.png" alt="Dossiê Técnico Pericial em PDF" width="100%" />
+      <p><strong>Dossiê Pericial em PDF:</strong> Laudos técnicos gerados assincronamente com assinatura digital e carimbo de tempo.</p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center" valign="top">
+      <img src="docs/assets/app_signature_modal.jpg" alt="Assinatura Digital e Biometria" width="60%" />
+      <p><strong>Assinatura Digital & Biometria:</strong> Selo de campo com fixação de coordenadas GPS e hash SHA-256 de integridade.</p>
+    </td>
+  </tr>
+</table>
 
 ---
 
