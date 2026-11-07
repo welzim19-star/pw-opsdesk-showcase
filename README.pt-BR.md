@@ -22,17 +22,17 @@ O PW OpsDesk atua como o sistema nervoso central conectando inspetores móveis e
 
 ```mermaid
 flowchart TD
-    subgraph FIELD_CLIENTS["Camada Operacional de Campo (Android / Mobile)"]
-        Inspector["PW Certify Enterprise<br/>(Capacitor + Tauri Mobile)"]
-        Biometrics["Biometria Facial & TOTP<br/>(Desafio-Resposta Offline)"]
+    subgraph FIELD_CLIENTS["Camada de Campo (Android / Mobile)"]
+        Inspector["PW Certify Enterprise<br/>(Capacitor + Tauri)"]
+        Biometrics["Biometria Facial & TOTP<br/>(Desafio Offline)"]
         Inspector --- Biometrics
     end
 
     subgraph CORE_SERVER["Motor Central PW OpsDesk (Node.js ESM)"]
-        Auth["Motor de Aplicação RBAC<br/>(Administrador / Supervisor / Operador)"]
-        SocketHub["Central de Despacho em Tempo Real<br/>(Motor Socket.io)"]
-        Storage["Armazenamento em Jornal Atômico<br/>(SQLite Modo WAL)"]
-        PDF["Gerador de Laudos PDF Periciais<br/>(Motor de Assinatura Digital)"]
+        Auth["Controle RBAC<br/>(Admin / Supervisor / Operador)"]
+        SocketHub["Central de Despacho<br/>(Socket.io em Tempo Real)"]
+        Storage["Jornal Atômico<br/>(SQLite Modo WAL)"]
+        PDF["Laudos Periciais PDF<br/>(Assinatura Digital)"]
         
         Auth --> SocketHub
         SocketHub --> Storage
@@ -40,11 +40,11 @@ flowchart TD
     end
 
     subgraph EXTERNAL["Integrações Corporativas"]
-        HaloITSM["API de Service Desk HaloITSM<br/>(Sincronização Bidirecional)"]
-        AuditStream["Transmissor de Trilha SHA-256"]
+        HaloITSM["API HaloITSM<br/>(Sync Bidirecional)"]
+        AuditStream["Trilha de Auditoria<br/>(Cadeia SHA-256)"]
     end
 
-    FIELD_CLIENTS -- "Sincronização Live WebSocket (Sub-50ms)" --> SocketHub
+    FIELD_CLIENTS -- "WebSocket Live Sync (Sub-50ms)" --> SocketHub
     FIELD_CLIENTS -- "HTTPS REST (Descarga Offline)" --> Auth
     CORE_SERVER --> HaloITSM
     CORE_SERVER --> AuditStream
