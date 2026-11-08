@@ -22,17 +22,17 @@ PW OpsDesk operates as the nervous system connecting mobile field inspectors, su
 
 ```mermaid
 flowchart TD
-    subgraph FIELD_CLIENTS["Field Operational Tier (Android / Mobile)"]
-        Inspector["PW Certify Enterprise<br/>(Capacitor + Tauri)"]
-        Biometrics["Face Biometrics & TOTP<br/>(Offline Challenge)"]
+    subgraph FIELD_CLIENTS["Field Operational Tier"]
+        Inspector["PW Certify Enterprise"]
+        Biometrics["Face Biometrics & TOTP"]
         Inspector --- Biometrics
     end
 
-    subgraph CORE_SERVER["PW OpsDesk Central Engine (Node.js ESM)"]
-        Auth["RBAC Enforcement<br/>(Admin / Supervisor / Operator)"]
-        SocketHub["Real-Time Dispatch Hub<br/>(Socket.io Engine)"]
-        Storage["Atomic Journal Storage<br/>(SQLite WAL Mode)"]
-        PDF["Forensic PDF Engine<br/>(Digital Signature)"]
+    subgraph CORE_SERVER["PW OpsDesk Central Engine"]
+        Auth["RBAC Enforcement"]
+        SocketHub["Real-Time Dispatch Hub"]
+        Storage["Atomic Journal Storage"]
+        PDF["Forensic PDF Engine"]
         
         Auth --> SocketHub
         SocketHub --> Storage
@@ -40,12 +40,12 @@ flowchart TD
     end
 
     subgraph EXTERNAL["Enterprise Integrations"]
-        HaloITSM["HaloITSM Service Desk API<br/>(Bidirectional Sync)"]
-        AuditStream["Audit Trail Streamer<br/>(SHA-256 Chained)"]
+        HaloITSM["HaloITSM Service Desk API"]
+        AuditStream["SHA-256 Audit Streamer"]
     end
 
-    FIELD_CLIENTS -- "WebSocket Live Sync (Sub-50ms)" --> SocketHub
-    FIELD_CLIENTS -- "HTTPS REST (Offline Flush)" --> Auth
+    FIELD_CLIENTS -- "WebSocket Live Sync" --> SocketHub
+    FIELD_CLIENTS -- "HTTPS REST Flush" --> Auth
     CORE_SERVER --> HaloITSM
     CORE_SERVER --> AuditStream
 ```
