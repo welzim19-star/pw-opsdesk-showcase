@@ -15,6 +15,7 @@ import { RBACEngine, ROLES } from './core/rbac.js';
 import { StorageEngine } from './core/storage.js';
 import { AuditTrailEngine } from './core/auditTrail.js';
 import { EcosystemAdapters } from './core/ecosystemAdapters.js';
+import { SIMULATOR_APPS, runSimulatorStep, getScenarioStepCount } from './core/certifySimulator.js';
 import { TicketEntity, STATUS, PENDING_REASONS, JOURNAL_TYPE, PRIORITY, TICKET_TYPE, CLOSE_CODES, CAUSE_CODES, SERVICE_CATEGORIES } from './core/domain.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -523,6 +524,54 @@ app.post('/api/integration/prefill-link', requireApiKey, (req, res) => {
 });
 
 // ─── WEBSOCKET ────────────────────────────────────────────────────────────────
+// ─── CERTIFY FIELD SIMULATOR (PONTE DO ECOSSISTEMA PW) ───────────────────────
+// Protegido por sessão (x-auth-token). Reutiliza os mesmos canais do app de campo.
+const SIM_MAX_SIMULATED_TICKETS = 30;
+const simLastHit = new Map();
+
+function pruneSimulatedTickets() {
+    const d = db();
+    const sims = Object.values(d.tickets || {}).filter(t => String(t.id).startsWith('EXT-'));
+    if (sims.length <= SIM_MAX_SIMULATED_TICKETS) return;
+    sims.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+    sims.slice(0, sims.length - SIM_MAX_SIMULATED_TICKETS).forEach(t => { delete d.tickets[t.id]; });
+    storage.saveAll(d);
+}
+
+app.get('/api/simulator/apps', requireAuth, (req, res) => {
+    res.json({ apps: SIMULATOR_APPS });
+});
+
+app.post('/api/simulator/step', requireAuth, (req, res) => {
+    try {
+        const token = req.headers['x-auth-token'];
+        const now = Date.now();
+        if (now - (simLastHit.get(token) || 0) < 400) {
+            return res.status(429).json({ error: 'ERR_RATE_LIMITED', correlation_id: uuidv4() });
+        }
+        simLastHit.set(token, now);
+
+        const { scenarioId, stepIndex, ctx } = req.body || {};
+        if (!Number.isInteger(stepIndex) || stepIndex < 0 || stepIndex >= getScenarioStepCount(scenarioId)) {
+            return res.status(400).json({ error: 'ERR_INVALID_STEP', correlation_id: uuidv4() });
+        }
+        const safeCtx = {
+            ticketId: typeof ctx?.ticketId === 'string' ? ctx.ticketId : undefined,
+            osNumber: typeof ctx?.osNumber === 'string' ? ctx.osNumber : undefined
+        };
+        if (stepIndex > 0 && !(safeCtx.ticketId && String(safeCtx.ticketId).startsWith('EXT-'))) {
+            return res.status(400).json({ error: 'ERR_CONTEXT_REQUIRED', correlation_id: uuidv4() });
+        }
+        const result = runSimulatorStep(ecosystem, scenarioId, stepIndex, safeCtx);
+        if (stepIndex === 0) pruneSimulatedTickets();
+        logAudit('SIMULATOR_STEP', req.user.name, result.ticketId, { scenarioId, stepIndex, channel: result.channel });
+        res.json(result);
+    } catch (e) {
+        telemetry.killcam('server.js', 'SIMULATOR_STEP_FAIL', e);
+        res.status(400).json({ error: e.message, correlation_id: uuidv4() });
+    }
+});
+
 io.on('connection', (socket) => {
     telemetry.checkpoint('server.js', 'ws.connect', { id: socket.id });
     socket.on('disconnect', () => telemetry.checkpoint('server.js', 'ws.disconnect', { id: socket.id }));

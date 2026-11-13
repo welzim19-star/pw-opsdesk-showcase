@@ -398,7 +398,8 @@ function navigateTo(page) {
       dashboard: 'Dashboard', 'my-tickets': 'Meus Chamados',
       incidents: 'Incidentes', requests: 'Requisições de Serviço',
       problems: 'Problemas', changes: 'Mudanças',
-      knowledge: 'Base de Conhecimento', reports: 'Relatórios', 'audit-vault': 'Cofre de Auditoria'
+      knowledge: 'Base de Conhecimento', reports: 'Relatórios', 'audit-vault': 'Cofre de Auditoria',
+      'certify-bridge': 'Ponte do Ecossistema PW'
     }[page] || page;
   }
 
@@ -408,6 +409,7 @@ function navigateTo(page) {
   else if (page === 'incidents') renderQueue('incidents');
   else if (page === 'requests') renderQueue('requests');
   else if (page === 'audit-vault') renderAuditVault();
+  else if (page === 'certify-bridge') renderCertifyBridge();
   else {
     content.innerHTML = `<div class="empty-state"><div class="empty-state-icon">${page==='problems'?'🔍':page==='changes'?'🔄':page==='knowledge'?'📚':'📈'}</div><div class="empty-state-title">Módulo em Implementação</div><div class="empty-state-sub">Este módulo será disponibilizado na Fase 2 do roadmap.</div></div>`;
   }

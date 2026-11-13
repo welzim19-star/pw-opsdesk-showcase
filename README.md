@@ -88,6 +88,20 @@ Field captures from enterprise deployments demonstrating dispatcher controls, mo
 
 ---
 
+## 🎮 Interactive Live Playground — PW Ecosystem Bridge
+
+OpsDesk includes an interactive **Certify Bridge Simulator** accessible directly from the sidebar (`📡 Ponte Certify (LIVE)`), allowing real-time testing of the 3 flagship mobile field applications without needing physical Android devices:
+
+| Mobile Client | Operational Domain | Real-World Customer Reference | Simulated Scenario |
+| :--- | :--- | :--- | :--- |
+| **PW Resolve IT** | Corporate IT & Field OS | Ministério Público (MPRJ) | Network wall-jack repair, patch cord replacement, photo evidence & customer signature. |
+| **Certify Legado** | Telecom & Fiber Infrastructure | Getel / Centauro Seguradora | Fiber link break, SLA pause during site access clearance (`AGUARDANDO_ACESSO`), and OTDR fusion splicing report. |
+| **Certify Enterprise** | CCTV, Physical Security & Fluke | High-Density Enterprise Surveillance | P1 critical NVR/PoE switch breakdown, Fluke DSX cable diagnostic note, and power reconfiguration resolution. |
+
+Every simulated step executes through the **real integration transport layer** (`EcosystemAdapters.handleRemoteIngest`, `handleStatusSync`, `handleRemoteResolution`), triggering live WebSocket broadcasts (`ticket:created`, `ticket:updated`, `ticket:remote_resolved`), real-time notification chimes, and cryptographic audit log entries.
+
+---
+
 ## 🛡️ Enterprise Governance & Security Matrix
 
 ### 1. Granular Role-Based Access Control (RBAC)

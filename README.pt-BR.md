@@ -88,6 +88,20 @@ Registros de campo em ambiente corporativo demonstrando os fluxos de despacho, a
 
 ---
 
+## 🎮 Simulador Interativo — Ponte do Ecossistema PW
+
+O OpsDesk possui uma **Ponte Certify** interativa embutida na barra lateral (`📡 Ponte Certify (LIVE)`), permitindo simular ponta a ponta o comportamento dos 3 aplicativos móveis de campo da PW sem necessidade de dispositivos físicos:
+
+| Aplicativo Mobile | Domínio Operacional | Referência Real de Produção | Cenário Simulado |
+| :--- | :--- | :--- | :--- |
+| **PW Resolve IT** | Suporte TI Corporativa & OS | Ministério Público (MPRJ) | Reparo de ponto de rede RJ45, troca de patch cord, evidências fotográficas e assinatura digital do usuário. |
+| **Certify Legado** | Telecomunicações & Fibra Óptica | Getel / Centauro Seguradora | Rompimento de cabo óptico, pausa de SLA por liberação de acesso (`AGUARDANDO_ACESSO`) e laudo OTDR de fusão. |
+| **Certify Enterprise** | CFTV, Segurança Eletrônica & Fluke | Monitoramento Crítico de Alto Porte | Incidente P1 crítico em switch PoE/NVR, laudo de certificação Fluke DSX e restabelecimento com fotos de campo. |
+
+Cada ação do simulador trafega pelos **adaptadores reais de integração** (`EcosystemAdapters.handleRemoteIngest`, `handleStatusSync`, `handleRemoteResolution`), disparando eventos WebSocket reais (`ticket:created`, `ticket:updated`, `ticket:remote_resolved`), alertas sonoros no painel e registros auditados no banco.
+
+---
+
 ## 🛡️ Matriz de Segurança & Governança Corporativa
 
 ### 1. Controle de Acesso Baseado em Papéis (RBAC Granular)
