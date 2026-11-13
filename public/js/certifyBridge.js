@@ -52,7 +52,11 @@
       renderBridgeApps();
     } catch (e) {
       document.getElementById('bridgeApps').innerHTML =
-        `<div class="empty-state"><div class="empty-state-title">Não foi possível carregar o simulador</div><div class="empty-state-sub">${escHtml(e.message)}</div></div>`;
+        `<div class="empty-state">
+          <div class="empty-state-title">Não foi possível carregar o simulador</div>
+          <div class="empty-state-sub">${escHtml(e.message)}</div>
+          <button class="btn btn-secondary" style="margin-top:12px" onclick="renderCertifyBridge()">🔄 Tentar Novamente</button>
+        </div>`;
     }
   };
 

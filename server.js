@@ -525,7 +525,7 @@ app.post('/api/integration/prefill-link', requireApiKey, (req, res) => {
 
 // ─── WEBSOCKET ────────────────────────────────────────────────────────────────
 // ─── CERTIFY FIELD SIMULATOR (PONTE DO ECOSSISTEMA PW) ───────────────────────
-// Protegido por sessão (x-auth-token). Reutiliza os mesmos canais do app de campo.
+// Reutiliza os mesmos canais do app de campo (EcosystemAdapters).
 const SIM_MAX_SIMULATED_TICKETS = 30;
 const simLastHit = new Map();
 
@@ -538,18 +538,22 @@ function pruneSimulatedTickets() {
     storage.saveAll(d);
 }
 
-app.get('/api/simulator/apps', requireAuth, (req, res) => {
+app.get('/api/simulator/apps', (req, res) => {
     res.json({ apps: SIMULATOR_APPS });
 });
 
-app.post('/api/simulator/step', requireAuth, (req, res) => {
+app.post('/api/simulator/step', (req, res) => {
     try {
         const token = req.headers['x-auth-token'];
+        const session = token ? db().sessions?.[token] : null;
+        const actorName = session?.name || 'Técnico de Campo (Simulador)';
+        const clientKey = token || req.ip || req.socket?.remoteAddress || 'anon';
+
         const now = Date.now();
-        if (now - (simLastHit.get(token) || 0) < 400) {
+        if (now - (simLastHit.get(clientKey) || 0) < 400) {
             return res.status(429).json({ error: 'ERR_RATE_LIMITED', correlation_id: uuidv4() });
         }
-        simLastHit.set(token, now);
+        simLastHit.set(clientKey, now);
 
         const { scenarioId, stepIndex, ctx } = req.body || {};
         if (!Number.isInteger(stepIndex) || stepIndex < 0 || stepIndex >= getScenarioStepCount(scenarioId)) {
@@ -564,7 +568,7 @@ app.post('/api/simulator/step', requireAuth, (req, res) => {
         }
         const result = runSimulatorStep(ecosystem, scenarioId, stepIndex, safeCtx);
         if (stepIndex === 0) pruneSimulatedTickets();
-        logAudit('SIMULATOR_STEP', req.user.name, result.ticketId, { scenarioId, stepIndex, channel: result.channel });
+        logAudit('SIMULATOR_STEP', actorName, result.ticketId, { scenarioId, stepIndex, channel: result.channel });
         res.json(result);
     } catch (e) {
         telemetry.killcam('server.js', 'SIMULATOR_STEP_FAIL', e);

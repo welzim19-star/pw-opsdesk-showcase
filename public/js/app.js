@@ -296,11 +296,21 @@ function populateSidebarUser() {
 async function apiFetch(path, method='GET', body=null) {
   const opts = {
     method,
-    headers: { 'Content-Type':'application/json', 'x-auth-token': token }
+    headers: { 'Content-Type':'application/json' }
   };
+  if (token) opts.headers['x-auth-token'] = token;
   if (body) opts.body = JSON.stringify(body);
   const res = await fetch(`${API}${path}`, opts);
-  const data = await res.json();
+  const data = await res.json().catch(() => ({}));
+  if (res.status === 401 && (data.error === 'ERR_SESSION_INVALID' || data.error === 'ERR_UNAUTHORIZED')) {
+    token = null;
+    currentUser = null;
+    localStorage.removeItem('opsdesk_token');
+    localStorage.removeItem('opsdesk_user');
+    showLogin();
+    showToast('warning', 'Sessão Expirada', 'Faça login com master/master123 ou clique nos atalhos.');
+    throw new Error('Sessão expirada. Por favor, faça login novamente.');
+  }
   if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
   return data;
 }
