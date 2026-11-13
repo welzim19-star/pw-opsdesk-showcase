@@ -226,6 +226,17 @@ function initApp() {
   setupNavigation();
   P1AlarmEngine.init();
 
+  window.addEventListener('opsLangChanged', () => {
+    if (currentPage === 'dashboard') renderDashboard();
+    else if (currentPage === 'my-tickets') renderMyTickets();
+    else if (currentPage === 'incidents') renderQueue('incidents');
+    else if (currentPage === 'requests') renderQueue('requests');
+    else if (currentPage === 'certify-bridge') renderCertifyBridge();
+    if (window.OpsI18n) {
+      showToast('info', 'Idioma / Language', window.OpsI18n.t('toast_lang_changed'));
+    }
+  });
+
   // Roteamento inteligente por RBAC:
   // OPERADOR spawna direto na sua fila de chamados ("my-tickets")
   // MASTER / ADMIN spawna no Dashboard global de controle
