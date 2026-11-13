@@ -7,6 +7,7 @@
 [![Platform](https://img.shields.io/badge/Platform-B2B%20Enterprise%20SaaS-blue.svg)](https://github.com/PW-SYSTEM)
 [![Architecture](https://img.shields.io/badge/Architecture-Event--Driven%20%2F%20Socket.io-orange.svg)](https://socket.io/)
 [![Standard](https://img.shields.io/badge/Standard-Cherwell%20ITSM%20Compliant-brightgreen.svg)](https://www.ivanti.com)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-pw--opsdesk--showcase.onrender.com-00C7B7?logo=render&logoColor=white)](https://pw-opsdesk-showcase.onrender.com)
 [![Organization](https://img.shields.io/badge/Organization-PW--SYSTEM-black.svg)](https://github.com/PW-SYSTEM)
 [![Status](https://img.shields.io/badge/Proprietary-Commercial%20B2B-red.svg)](https://github.com/PW-SYSTEM)
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/welzim19-star/pw-opsdesk-showcase)
@@ -14,6 +15,22 @@
 > **Architectural Showcase & System Design Specification.**  
 > Central command desk for mission-critical operations, field service inspection, and biometric auditing developed for public agencies and enterprise telecom/CCTV infrastructure.  
 > *Developed and maintained by [PW-SYSTEM](https://github.com/PW-SYSTEM).*
+
+---
+
+## 🌐 Live Cloud Deployment & Interactive Demo
+
+The production showcase instance is live on Render:
+
+🔗 **[https://pw-opsdesk-showcase.onrender.com](https://pw-opsdesk-showcase.onrender.com)**
+
+### Quick-Access Credentials (Demo RBAC Accounts)
+| Role | Username | Password | Operational Scope |
+| :--- | :--- | :--- | :--- |
+| **Master Dispatcher** | `master` | `master123` | Full dashboard access, ticket dispatch, supervisor override, and telemetry radar. |
+| **System Administrator** | `admin1` | `admin123` | Audit vault inspection, compliance logs, SLA settings, and tenant management. |
+| **N2 CCTV Technician** | `tec01` | `tec123` | Field technician view, queue execution, diagnostic notes, and work log. |
+| **N1 Cabling Technician** | `tec02` | `tec123` | Field technician view, network point repairs, and hardware swaps. |
 
 ---
 
@@ -102,7 +119,13 @@ Every simulated step executes through the **real integration transport layer** (
 
 ---
 
-## 🛡️ Enterprise Governance & Security Matrix
+## 🛡️ Enterprise Governance & Security Matrix (CIA Triad)
+
+| Pillar | Engineering Mechanism | Implementation Details |
+| :--- | :--- | :--- |
+| **Confidentiality** | **4-Tier Granular RBAC + TLS 1.3** | Strict role segregation (`OPERADOR`, `SUPERVISOR`, `ADMIN`, `MASTER`). Enforced HTTPS/WSS encryption via Render TLS edge. API Key tokenization for remote ingest webhooks. Automatic session expiration recovery. |
+| **Integrity** | **Cryptographic SHA-256 Merkle Chain** | Every system state mutation (ticket creation, SLA pause, resolution, forensic upload) is sealed into a chained SHA-256 ledger block ($H_n = \text{SHA256}(H_{n-1} + \text{data})$). Tampering with any historical record invalidates subsequent hashes. Mandatory close/cause codes, digital signature canvas, and base64 photographic evidence. |
+| **Availability** | **Anti-OOM Pruning & Rate Limiting** | Automated ticket pool pruning maintaining memory usage < 45 MB RAM (well below 512 MB free tier limits). Debounce & client rate-limiting preventing spam/DDoS. Socket.io dual transport with automatic HTTP Long-Polling fallback. |
 
 ### 1. Granular Role-Based Access Control (RBAC)
 - **Field Operator:** Restricted to assigned ticket scope, camera/photo capture, and geolocation check-in.
