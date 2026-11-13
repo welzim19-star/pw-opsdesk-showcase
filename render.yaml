@@ -1,0 +1,23 @@
+# =============================================================================
+# PW OpsDesk Showcase — Render Free Tier Deployment Blueprint
+# File: render.yaml
+# =============================================================================
+# 1-Click deploy on Render. Free Web Service with sub-40MB RAM footprint.
+# Real-Time WebSocket Central Dispatch & ITSM Governance Engine.
+# =============================================================================
+
+services:
+  - type: web
+    name: pw-opsdesk-showcase
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: "3000"
+      - key: NODE_ENV
+        value: production

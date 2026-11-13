@@ -1,0 +1,17 @@
+{
+  "name": "pw-opsdesk",
+  "version": "1.0.0",
+  "description": "PW OpsDesk — Sistema Central de Chamados ITSM Mobile-First com RBAC, Cherwell Standard e Live Sync",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5",
+    "uuid": "^9.0.1"
+  }
+}
